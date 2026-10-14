@@ -5199,6 +5199,9 @@ class URDFViewer {
     };
 
     const loader = new URDFLoader();
+    // URDFLoader.load() fetches the .urdf via fetch(url, this.fetchOptions) - bypass the
+    // browser HTTP cache so an edited URDF is always picked up on reload.
+    loader.fetchOptions = { cache: "no-store" };
     // Some models (e.g. sw_17's sw17.urdf) author their <mesh filename="..."> as ROS
     // "package://sw17/meshes/foo.STL" URIs instead of a plain relative path like
     // "../meshes/foo.STL" (which is what sw_14/sw_15's URDFs use, and which resolves
